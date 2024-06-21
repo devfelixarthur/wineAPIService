@@ -9,6 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -34,16 +37,33 @@ public class User implements UserDetails {
     @Column(nullable = false, length = 255)
     private String senha;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
     private UserRole role;
 
     @Column(name = "dt_nascimento")
-    private Date dtNascimento;
+    private LocalDate dtNascimento;
 
-    @Column(name = "data_cadastro")
-    private Date dataCadastro;
+    @Column(name = "data_cadastro", nullable = false, updatable = false)
+    private ZonedDateTime dataCadastro;
 
+    @Column(nullable = false, length = 50)
     private String status;
+
+    @PrePersist
+    protected void onCreate() {
+        dataCadastro = ZonedDateTime.now(ZoneOffset.UTC);
+    }
+
+    public User(String nome, String email, String senha, UserRole role, LocalDate dtNascimento, String status) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.role = role;
+        this.dtNascimento = dtNascimento;
+        this.status = status;
+        this.dataCadastro = ZonedDateTime.now(ZoneOffset.UTC);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
