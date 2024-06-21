@@ -1,5 +1,6 @@
 package com.api.wiveService.WineService.controller;
 
+import com.api.wiveService.WineService.config.security.TokenService;
 import com.api.wiveService.WineService.domain.user.AuthenticationDTO;
 import com.api.wiveService.WineService.domain.user.RegisterUserDTO;
 import com.api.wiveService.WineService.domain.user.User;
@@ -19,14 +20,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.naming.AuthenticationException;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -40,12 +37,18 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO login){
+    public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login){
         var usernamePassword = new UsernamePasswordAuthenticationToken(login.email(), login.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponsePadraoDTO.sucesso(token);
     }
 
     @PostMapping("/register")
@@ -56,7 +59,7 @@ public class AuthenticationController {
         }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
-        UserRole role = UserRole.ADMIN;
+        UserRole role = UserRole.USER;
         String status = "Ativo";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
