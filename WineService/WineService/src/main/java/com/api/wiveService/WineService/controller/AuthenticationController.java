@@ -58,9 +58,11 @@ public class AuthenticationController {
             throw new WineException(new MsgCodWineApi().getCodigoErro(1), BAD_REQUEST);
         }
 
+
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
         UserRole role = UserRole.USER;
         String status = "Ativo";
+
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dtNascimento;
