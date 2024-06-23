@@ -1,4 +1,4 @@
-package com.api.wiveService.WineService.service.Authetication;
+package com.api.wiveService.WineService.service.authetication;
 
 import com.api.wiveService.WineService.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

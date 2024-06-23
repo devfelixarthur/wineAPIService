@@ -27,8 +27,16 @@ public class MsgCodWineApi {
 
 
     private void preencherCodigosErro() {
-        mapaCodigosErro.put(1, "Erro - Falha - Usuário já cadastrado para o email informado");
+        mapaCodigosErro.put(1, "Erro - Falha - O email informado já está sendo usado por outro usuário.");
         mapaCodigosErro.put(2, "Erro - Falha - Data de nascimento inválida. Use o formato dd/MM/yyyy.");
         mapaCodigosErro.put(3, "Erro - Falha - Data de nascimento não pode ser no futuro.");
+        mapaCodigosErro.put(4, "Erro - Falha - Usuário não encontrado para o Id informado.");
+        mapaCodigosErro.put(5, "Erro - Falha - O Email informado já está em uso por outro usuário.");
+        mapaCodigosErro.put(6, "Erro - Falha - Somente Usuários Administradores podem deletar dados.");
+        mapaCodigosErro.put(7, "Erro - Falha - O itemInicio dever ser maior que 0.");
+        mapaCodigosErro.put(8, "Erro - Falha - O itemFim dever ser maior que 0.");
+        mapaCodigosErro.put(9, "Erro - Falha - O itemInicio não pode ser maior que o itemFim.");
+        mapaCodigosErro.put(10, "Erro - Falha - O itemInicio e itemFim devem ser informados");
+
     }
 }

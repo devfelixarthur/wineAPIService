@@ -1,17 +1,18 @@
 package com.api.wiveService.WineService.controller;
 
 import com.api.wiveService.WineService.config.security.TokenService;
-import com.api.wiveService.WineService.domain.user.AuthenticationDTO;
-import com.api.wiveService.WineService.domain.user.RegisterUserDTO;
-import com.api.wiveService.WineService.domain.user.User;
+import com.api.wiveService.WineService.domain.user.dto.AuthenticationDTO;
+import com.api.wiveService.WineService.domain.user.dto.RegisterUserDTO;
+import com.api.wiveService.WineService.domain.user.bean.User;
 import com.api.wiveService.WineService.domain.user.UserRole;
 import com.api.wiveService.WineService.exceptions.WineException;
 import com.api.wiveService.WineService.repository.UserRepository;
 import com.api.wiveService.WineService.util.MsgCodWineApi;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,6 +40,9 @@ public class AuthenticationController {
 
     @Autowired
     private TokenService tokenService;
+
+    private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
+
 
     @PostMapping("/login")
     public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login){
@@ -80,6 +84,7 @@ public class AuthenticationController {
         User newUser = new User(data.nome(), data.email(), encryptedPassword, role, dtNascimento, status);
         this.userRepository.save(newUser);
 
+        logger.info("Usuário Cadastrado com sucesso: {} ", newUser);
         return ResponsePadraoDTO.sucesso("Cadastro realizado com sucesso!");
     }
 }

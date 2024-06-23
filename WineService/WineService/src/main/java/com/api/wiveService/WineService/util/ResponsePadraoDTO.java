@@ -1,5 +1,7 @@
 package com.api.wiveService.WineService.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import net.minidev.json.JSONObject;
@@ -29,4 +31,6 @@ public class ResponsePadraoDTO {
     public static ResponsePadraoDTO sucesso(String mensagem) {
         return new ResponsePadraoDTO("Sucesso", mensagem);
     }
+
+
 }
