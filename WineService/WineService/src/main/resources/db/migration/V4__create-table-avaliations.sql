@@ -7,5 +7,5 @@ CREATE TABLE cadastro_avaliacao (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     data_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_avaliacao_usuario FOREIGN KEY (id_usuario) REFERENCES cadastro_usuarios (id) ON DELETE CASCADE,
-    CONSTRAINT fk_avaliacao_vinho FOREIGN KEY (id_vinho) REFERENCES cadastro_vinhos (id) ON DELETE CASCADE
+    CONSTRAINT fk_avaliacao_vinho FOREIGN KEY (id_vinho) REFERENCES cadastro_wine (id) ON DELETE CASCADE
 );

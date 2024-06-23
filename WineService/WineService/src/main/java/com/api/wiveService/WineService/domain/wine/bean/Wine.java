@@ -1,17 +1,14 @@
-package com.api.wiveService.WineService.domain.wine;
+package com.api.wiveService.WineService.domain.wine.bean;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.UUID;
 
 @Table(name = "cadastro_wine")
 @Entity
@@ -41,8 +38,8 @@ public class Wine {
     private String adega;
 
     @NotNull(message = "A safra é obrigatória.")
-    @Min(value = 1000, message = "A safra deve ser um ano válido.")
-    @Max(value = 9999, message = "A safra deve ser um ano válido.")
+    @Min(value = 1501, message = "O ano deve ser superior a 1500.")
+    @Max(value = 9999, message = "O ano deve ser inferior a 9999.")
     @Column(nullable = false)
     private Integer safra;
 
@@ -61,10 +58,10 @@ public class Wine {
 
     @NotNull(message = "A data de cadastro é obrigatória.")
     @Column(name = "data_cadastro")
-    private Date dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @NotNull(message = "A data de atualização é obrigatória.")
     @Column(name = "data_update")
-    private Date dataUpdate;
+    private LocalDateTime dataUpdate;
 
 }

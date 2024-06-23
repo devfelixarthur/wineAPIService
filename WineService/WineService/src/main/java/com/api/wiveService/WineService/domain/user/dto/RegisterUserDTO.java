@@ -1,4 +1,4 @@
-package com.api.wiveService.WineService.domain.user;
+package com.api.wiveService.WineService.domain.user.dto;
 
 import jakarta.validation.constraints.*;
 

@@ -1,5 +1,6 @@
-package com.api.wiveService.WineService.domain.user;
+package com.api.wiveService.WineService.domain.user.bean;
 
+import com.api.wiveService.WineService.domain.user.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Table(name="cadastro_usuarios")

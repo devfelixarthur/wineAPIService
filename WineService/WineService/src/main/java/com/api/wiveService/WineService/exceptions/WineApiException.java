@@ -1,6 +1,5 @@
 package com.api.wiveService.WineService.exceptions;
 
-import jakarta.annotation.Generated;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -21,8 +20,8 @@ public class WineApiException extends RuntimeException{
         super(message, cause);
     }
 
-    public WineApiException(String title, String message) {
-        super(message);
+    public WineApiException(String title, HttpStatus message) {
+        super(String.valueOf(message));
         this.title = title;
     }
 
