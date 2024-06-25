@@ -39,6 +39,7 @@ public class MsgCodWineApi {
         mapaCodigosErro.put(10, "Erro - Falha - O itemInicio e itemFim devem ser informados.");
         mapaCodigosErro.put(11, "Erro - Falha - Vinho não encontrado para o Id informado.");
         mapaCodigosErro.put(12, "Erro - Falha - Comment não encontrado para o Id informado.");
+        mapaCodigosErro.put(13, "Erro - Falha - Avaliação não encontrado para o Id informado.");
 
     }
 }

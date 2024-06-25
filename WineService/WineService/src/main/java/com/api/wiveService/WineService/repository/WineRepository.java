@@ -24,4 +24,5 @@ public interface WineRepository extends JpaRepository<Wine, Long> {
     Optional<Wine> buscarWine(@Param("nome") String nome, @Param("safra") Integer safra, @Param("pais") String pais, @Param("uva") String uva);
     @Query("SELECT w FROM Wine w WHERE w.id = :id")
     Optional<Wine> buscarWineById(@Param("id") Long id);
+
 }

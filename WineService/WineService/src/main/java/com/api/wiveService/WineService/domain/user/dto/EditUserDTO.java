@@ -1,13 +1,12 @@
 package com.api.wiveService.WineService.domain.user.dto;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 
 public record EditUserDTO(
         @NotNull(message = "O Id é um campo obrigatório.")
+        @DecimalMin(value="1", message = "O id deve ser um numero inteiro e positivo.")
+
         Long id,
 
         String nome,

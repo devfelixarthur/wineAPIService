@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Table(name="cadastro_avaliacao")
@@ -49,10 +50,10 @@ public class Avaliacao {
 
     @NotNull(message = "A data de cadastro é obrigatória.")
     @Column(name = "data_cadastro")
-    private Date dataCadastro;
+    private LocalDateTime dataCadastro;
 
     @NotNull(message = "A data de atualização é obrigatória.")
     @Column(name = "data_update")
-    private Date dataUpdate;
+    private LocalDateTime dataUpdate;
 
 }
