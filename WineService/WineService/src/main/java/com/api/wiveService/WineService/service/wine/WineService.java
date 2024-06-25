@@ -1,5 +1,6 @@
 package com.api.wiveService.WineService.service.wine;
 
+import com.api.wiveService.WineService.domain.avaliacao.bean.Avaliacao;
 import com.api.wiveService.WineService.domain.comments.bean.Comments;
 import com.api.wiveService.WineService.domain.comments.dto.CommentsDTO;
 import com.api.wiveService.WineService.domain.user.bean.User;
@@ -9,6 +10,7 @@ import com.api.wiveService.WineService.domain.wine.dto.*;
 import com.api.wiveService.WineService.exceptions.WineApiException;
 import com.api.wiveService.WineService.exceptions.WineException;
 import com.api.wiveService.WineService.exceptions.WineSucessException;
+import com.api.wiveService.WineService.repository.AvaliacaoRepository;
 import com.api.wiveService.WineService.repository.CommentRepository;
 import com.api.wiveService.WineService.repository.WineRepository;
 import com.api.wiveService.WineService.util.MsgCodWineApi;
@@ -42,6 +44,9 @@ public class WineService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private AvaliacaoRepository avaliacaoRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(WineService.class);
 
@@ -105,7 +110,7 @@ public class WineService {
         }
     }
 
-    public ResponsePadraoDTO alterarWine(AlterarWineDTO form){
+    public ResponsePadraoDTO alterarWine(AlterarWineDTO form) {
         Optional<Wine> wineExiste = wineRepository.findById(form.id());
 
         if (!wineExiste.isPresent()) {
@@ -154,10 +159,21 @@ public class WineService {
             wineDto.setComments(commentsDtos);
         });
 
+
         return new ResponseWineDTO(winePage.getTotalElements(), wineDtos);
     }
 
+    private double calculateMediaAvaliacao(Long wineId) {
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByWineId(wineId);
+        if (avaliacoes.isEmpty()) {
+            return 0.0;
+        }
+        double sum = avaliacoes.stream().mapToDouble(Avaliacao::getAvaliacao).sum();
+        return Math.round((sum / avaliacoes.size()) * 10.0) / 10.0;
+    }
+
     private WineDto convertToWineDto(Wine wine) {
+        double mediaAvaliacao = calculateMediaAvaliacao(wine.getId());
         return new WineDto(
                 wine.getId(),
                 wine.getNome(),
@@ -165,6 +181,7 @@ public class WineService {
                 wine.getAdega(),
                 wine.getSafra(),
                 wine.getImagem(),
+                mediaAvaliacao,
                 wine.getStatus(),
                 wine.getDataCadastro(),
                 new ArrayList<>()
