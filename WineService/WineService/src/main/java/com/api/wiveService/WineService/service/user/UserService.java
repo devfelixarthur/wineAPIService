@@ -105,7 +105,7 @@ public class UserService {
             throw new WineException(new MsgCodWineApi().getCodigoErro(6), HttpStatus.FORBIDDEN);
         }
 
-        Long userExiste = userRepository.findUserById(id);
+        Optional<User> userExiste = userRepository.findUserById(id);
 
         if(userExiste == null){
             throw new WineException(new MsgCodWineApi().getCodigoErro(4), HttpStatus.NOT_FOUND);

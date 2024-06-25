@@ -1,6 +1,8 @@
 package com.api.wiveService.WineService.controller;
 
+import com.api.wiveService.WineService.domain.user.dto.AlterarStatusUserDTO;
 import com.api.wiveService.WineService.domain.user.dto.ResponseUserDTO;
+import com.api.wiveService.WineService.domain.wine.dto.AlterarStatusWineDTO;
 import com.api.wiveService.WineService.domain.wine.dto.AlterarWineDTO;
 import com.api.wiveService.WineService.domain.wine.dto.CadastrarWineDTO;
 import com.api.wiveService.WineService.domain.wine.dto.ResponseWineDTO;
@@ -36,5 +38,11 @@ public class WineController {
             @RequestParam(defaultValue = "25") int itemFim) {
         ResponseWineDTO responseWinesDto = wineService.getAllWines(itemInicio, itemFim);
         return ResponseEntity.ok().body(responseWinesDto);
+    }
+
+    @PatchMapping("/alterarStatus")
+    public ResponseEntity<ResponsePadraoDTO> alterarStatus(@RequestBody @Valid AlterarStatusWineDTO form) {
+        ResponsePadraoDTO responsePadraoDTO = wineService.alterarStatus(form);
+        return ResponseEntity.ok().body(responsePadraoDTO);
     }
 }

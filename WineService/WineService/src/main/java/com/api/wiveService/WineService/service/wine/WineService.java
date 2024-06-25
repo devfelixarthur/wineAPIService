@@ -1,14 +1,15 @@
 package com.api.wiveService.WineService.service.wine;
 
+import com.api.wiveService.WineService.domain.comments.bean.Comments;
+import com.api.wiveService.WineService.domain.comments.dto.CommentsDTO;
+import com.api.wiveService.WineService.domain.user.bean.User;
 import com.api.wiveService.WineService.domain.user.dto.ResponseUserDTO;
 import com.api.wiveService.WineService.domain.wine.bean.Wine;
-import com.api.wiveService.WineService.domain.wine.dto.AlterarWineDTO;
-import com.api.wiveService.WineService.domain.wine.dto.CadastrarWineDTO;
-import com.api.wiveService.WineService.domain.wine.dto.Pais;
-import com.api.wiveService.WineService.domain.wine.dto.ResponseWineDTO;
+import com.api.wiveService.WineService.domain.wine.dto.*;
 import com.api.wiveService.WineService.exceptions.WineApiException;
 import com.api.wiveService.WineService.exceptions.WineException;
 import com.api.wiveService.WineService.exceptions.WineSucessException;
+import com.api.wiveService.WineService.repository.CommentRepository;
 import com.api.wiveService.WineService.repository.WineRepository;
 import com.api.wiveService.WineService.util.MsgCodWineApi;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
@@ -27,15 +28,20 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class WineService {
 
     @Autowired
     private WineRepository wineRepository;
+
+    @Autowired
+    private CommentRepository commentRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(WineService.class);
 
@@ -128,29 +134,64 @@ public class WineService {
     }
 
     public ResponseWineDTO getAllWines(Integer itemInicio, Integer itemFim) {
-
-        if ((itemInicio != null && itemFim == null) || (itemInicio == null && itemFim != null)) {
-            throw new WineException(new MsgCodWineApi().getCodigoErro(10), HttpStatus.BAD_REQUEST);
+        if ((itemInicio == null) || (itemFim == null) || (itemInicio < 1) || (itemFim < 1) || (itemInicio > itemFim)) {
+            throw new WineException("Parâmetros de Paginação invalidos.", HttpStatus.BAD_REQUEST);
         }
-        if (itemInicio < 1){
-            throw new WineException(new MsgCodWineApi().getCodigoErro(7), HttpStatus.BAD_REQUEST);
-        }
-        if (itemFim < 1){
-            throw new WineException(new MsgCodWineApi().getCodigoErro(8), HttpStatus.BAD_REQUEST);
-        }
-        if (itemInicio > itemFim){
-            throw new WineException(new MsgCodWineApi().getCodigoErro(9), HttpStatus.BAD_REQUEST);
-        }
-
 
         int page = (itemInicio - 1) / itemFim;
         int size = itemFim;
 
         Page<Wine> winePage = wineRepository.findAll(PageRequest.of(page, size));
-        Long totalWine = winePage.getTotalElements();
-        List<Wine> listWineDTO = winePage.getContent();
+        List<WineDto> wineDtos = winePage.getContent().stream()
+                .map(this::convertToWineDto)
+                .collect(Collectors.toList());
 
-        return new ResponseWineDTO(totalWine, listWineDTO);
+        wineDtos.forEach(wineDto -> {
+            List<Comments> comments = commentRepository.findByWineIdAndStatus(wineDto.getId());
+            List<CommentsDTO> commentsDtos = comments.stream()
+                    .map(comment -> new CommentsDTO(comment.getId(), comment.getUser().getId(), comment.getNomeUsuario(), comment.getDescricao(), comment.getDataCadastro()))
+                    .collect(Collectors.toList());
+            wineDto.setComments(commentsDtos);
+        });
+
+        return new ResponseWineDTO(winePage.getTotalElements(), wineDtos);
     }
 
+    private WineDto convertToWineDto(Wine wine) {
+        return new WineDto(
+                wine.getId(),
+                wine.getNome(),
+                wine.getPais(),
+                wine.getAdega(),
+                wine.getSafra(),
+                wine.getImagem(),
+                wine.getStatus(),
+                wine.getDataCadastro(),
+                new ArrayList<>()
+        );
+    }
+
+
+    public ResponsePadraoDTO alterarStatus(AlterarStatusWineDTO form) {
+
+        Optional<Wine> wineOptional = wineRepository.findById(form.getId());
+
+        if (wineOptional.isEmpty()) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(11), HttpStatus.BAD_REQUEST);
+        }
+
+        Wine wine = wineOptional.get();
+        String novoStatus = form.getStatus().equals(0) ? "Inativo" : "Ativo";
+
+        if (wine.getStatus().equals(novoStatus)) {
+            throw new WineException("Vinho já encontra-se " + novoStatus.toLowerCase(), HttpStatus.BAD_REQUEST);
+        }
+
+        wine.setStatus(novoStatus);
+        wineRepository.save(wine);
+        logger.info("----------------------INICIO LOGGER INFO:----------------------");
+        logger.info("Status do Vinho " + wine.getNome() + " alterado para " + novoStatus);
+        logger.info("----------------------FIM LOGGER INFO:----------------------");
+        return ResponsePadraoDTO.sucesso("Status do Vinho " + wine.getNome() + " alterado.");
+    }
 }

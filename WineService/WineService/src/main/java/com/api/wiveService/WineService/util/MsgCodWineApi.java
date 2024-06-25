@@ -36,7 +36,9 @@ public class MsgCodWineApi {
         mapaCodigosErro.put(7, "Erro - Falha - O itemInicio dever ser maior que 0.");
         mapaCodigosErro.put(8, "Erro - Falha - O itemFim dever ser maior que 0.");
         mapaCodigosErro.put(9, "Erro - Falha - O itemInicio não pode ser maior que o itemFim.");
-        mapaCodigosErro.put(10, "Erro - Falha - O itemInicio e itemFim devem ser informados");
+        mapaCodigosErro.put(10, "Erro - Falha - O itemInicio e itemFim devem ser informados.");
+        mapaCodigosErro.put(11, "Erro - Falha - Vinho não encontrado para o Id informado.");
+        mapaCodigosErro.put(12, "Erro - Falha - Comment não encontrado para o Id informado.");
 
     }
 }
