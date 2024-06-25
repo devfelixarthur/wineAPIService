@@ -11,9 +11,9 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -87,7 +87,6 @@ public class ResourcesExceptionHandler extends ResponseEntityExceptionHandler {
         ResponsePadraoDTO erro = ResponsePadraoDTO.falha(mensagem);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
     }
-
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ResponsePadraoDTO> handleConstraintViolationException(ConstraintViolationException e, HttpServletRequest request) {
         List<Problem.Field> fields = new ArrayList<>();
@@ -106,4 +105,12 @@ public class ResourcesExceptionHandler extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResponsePadraoDTO.falha(problem.getTitle()));
     }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+        String mensagem = "O parâmetro '" + ex.getParameterName() + "' é obrigatório.";
+        ResponsePadraoDTO erro = ResponsePadraoDTO.falha(mensagem);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erro);
+    }
+
 }

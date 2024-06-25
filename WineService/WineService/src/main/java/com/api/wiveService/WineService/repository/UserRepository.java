@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Optional;
+
 public interface UserRepository extends JpaRepository<User, String> {
 
     UserDetails findByEmail(String login);
@@ -21,7 +23,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
 
     @Query("SELECT u.id FROM User u WHERE u.id = :id")
-    Long findUserById(@Param("id") Long id);
+    Optional<User> findUserById(@Param("id") Long id);
 
     @Query("SELECT COUNT(u) FROM User u")
     Long countAllUsers();
