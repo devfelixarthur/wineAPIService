@@ -9,6 +9,11 @@ import com.api.wiveService.WineService.exceptions.WineException;
 import com.api.wiveService.WineService.repository.UserRepository;
 import com.api.wiveService.WineService.util.MsgCodWineApi;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +35,11 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("auth")
+
 public class AuthenticationController {
 
     @Autowired
-     private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -44,8 +50,15 @@ public class AuthenticationController {
     private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
 
+    @Operation(summary = "Login", description = "Login para autenticação e acesso a outros endpoints do sistema.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation",
+                    content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class)))
+    })
     @PostMapping("/login")
-    public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login){
+    public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(login.email(), login.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -55,6 +68,14 @@ public class AuthenticationController {
         return ResponsePadraoDTO.sucesso(token);
     }
 
+
+    @Operation(summary = "Registro de Usuário", description = "Endpoint para registro de um usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation",
+                    content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class)))
+    })
     @PostMapping("/register")
     public ResponsePadraoDTO register(@RequestBody @Valid RegisterUserDTO data) {
 

@@ -1,5 +1,6 @@
 package com.api.wiveService.WineService.domain.wine.bean;
 
+import com.api.wiveService.WineService.domain.wine.dto.Pais;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

@@ -17,4 +17,8 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long>{
 
     @Query("SELECT a FROM Avaliacao a WHERE a.wine.id = :wineId AND a.user.id = :userId")
     Optional<Avaliacao> finByIdUserAndIdWine(@Param("userId") Long userId, @Param("wineId") Long wineId);
+
+    @Query("SELECT COUNT(a) FROM Avaliacao a WHERE a.wine.id = :wineId")
+    Long countTotalAvaliation(@Param("wineId") Long wineId);
+
 }
