@@ -57,16 +57,6 @@ A API estará acessível via http://localhost:8080/.
 - **Hibernate** 🌿: Framework para mapeamento objeto-relacional que facilita a integração entre Java e bancos de dados.
 - **Lombok** 🧰: Biblioteca Java que usa anotações para minimizar o código boilerplate.
 
-## 🤝 Contribuindo
-
-Contribuições são o que fazem a comunidade open source um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você fizer serão **muito apreciadas**.
-
-1. Faça um Fork do projeto
-2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a Branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
 
 ## 📬 Contato
 
