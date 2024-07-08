@@ -174,6 +174,7 @@ public class WineService {
 
     private WineDto convertToWineDto(Wine wine) {
         double mediaAvaliacao = calculateMediaAvaliacao(wine.getId());
+        Integer qtnAvalicao = avaliacaoRepository.countAvaliacaoByWineId(wine.getId());
         return new WineDto(
                 wine.getId(),
                 wine.getNome(),
@@ -182,6 +183,7 @@ public class WineService {
                 wine.getSafra(),
                 wine.getImagem(),
                 mediaAvaliacao,
+                qtnAvalicao,
                 wine.getStatus(),
                 wine.getDataCadastro(),
                 new ArrayList<>()

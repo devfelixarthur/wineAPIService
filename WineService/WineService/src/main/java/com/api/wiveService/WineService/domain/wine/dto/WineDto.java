@@ -24,7 +24,8 @@ public class WineDto {
     private String adega;
     private Integer safra;
     private String imagem;
-    private double avaliation;
+    private double avaliacao;
+    private Integer qtdAvaliacao;
     private String status;
     private LocalDateTime dataCadastro;
     List<CommentsDTO> comments;
