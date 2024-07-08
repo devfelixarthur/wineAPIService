@@ -2,10 +2,7 @@ package com.api.wiveService.WineService.controller;
 
 import com.api.wiveService.WineService.domain.user.dto.AlterarStatusUserDTO;
 import com.api.wiveService.WineService.domain.user.dto.ResponseUserDTO;
-import com.api.wiveService.WineService.domain.wine.dto.AlterarStatusWineDTO;
-import com.api.wiveService.WineService.domain.wine.dto.AlterarWineDTO;
-import com.api.wiveService.WineService.domain.wine.dto.CadastrarWineDTO;
-import com.api.wiveService.WineService.domain.wine.dto.ResponseWineDTO;
+import com.api.wiveService.WineService.domain.wine.dto.*;
 import com.api.wiveService.WineService.service.wine.WineService;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
 import jakarta.validation.Valid;
@@ -27,7 +24,7 @@ public class WineController {
     }
 
     @PutMapping("/editarWine")
-    public ResponseEntity<ResponsePadraoDTO> cadastrarWine(@RequestBody @Valid AlterarWineDTO form) {
+    public ResponseEntity<ResponsePadraoDTO> editWine(@RequestBody @Valid AlterarWineDTO form) {
         ResponsePadraoDTO responsePadraoDTO = wineService.alterarWine(form);
         return ResponseEntity.ok().body(responsePadraoDTO);
     }
@@ -44,5 +41,11 @@ public class WineController {
     public ResponseEntity<ResponsePadraoDTO> alterarStatus(@RequestBody @Valid AlterarStatusWineDTO form) {
         ResponsePadraoDTO responsePadraoDTO = wineService.alterarStatus(form);
         return ResponseEntity.ok().body(responsePadraoDTO);
+    }
+
+    @GetMapping("/getCountries")
+    public ResponseEntity<ResponseCountryDTO> getAllCountries() {
+        ResponseCountryDTO responseCountriesDto = wineService.getAllCountries();
+        return ResponseEntity.ok().body(responseCountriesDto);
     }
 }

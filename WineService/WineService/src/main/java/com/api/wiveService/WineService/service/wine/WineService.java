@@ -30,10 +30,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.time.Year;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -212,5 +209,12 @@ public class WineService {
         logger.info("Status do Vinho " + wine.getNome() + " alterado para " + novoStatus);
         logger.info("----------------------FIM LOGGER INFO:----------------------");
         return ResponsePadraoDTO.sucesso("Status do Vinho " + wine.getNome() + " alterado.");
+    }
+    public ResponseCountryDTO getAllCountries() {
+        List<ResponseCountryDTO.CountryDTO> countries = Arrays.stream(Pais.values())
+                .map(pais -> new ResponseCountryDTO.CountryDTO(pais.getThreeDigitsCode(), pais.getName()))
+                .collect(Collectors.toList());
+
+        return new ResponseCountryDTO((long) countries.size(), countries);
     }
 }
