@@ -1,2 +1,75 @@
-# wineAPIService
-Wine Api WebService
+# 🍷 WineService API
+
+## 📝 Descrição
+
+WineService é uma API destinada a alimentar uma rede social de vinhos, oferecendo funcionalidades como cadastro de usuários, gerenciamento de vinhos (cadastro, edição e inativação), além de permitir a avaliação e comentários sobre os vinhos cadastrados. Desenvolvida em Java 17, esta API utiliza Spring Boot e JPA, garantindo robustez e escalabilidade para o serviço.
+
+## 📖 Documentação da API
+
+A documentação completa da API está disponível no Postman: [Visualizar Documentação](https://documenter.getpostman.com/view/24823254/2sA3e2eUGE)
+
+## 🚀 Pré-requisitos
+
+Para executar este projeto localmente, é necessário ter o seguinte instalado:
+
+- Java 17
+- Maven 3.6 ou superior
+
+## ⚙️ Configuração e Instalação
+
+### 🔽 Clonando o Repositório
+
+Para obter uma cópia local, siga estas etapas simples:
+
+```bash
+git clone https://github.com/seuusuario/WineService.git
+cd WineService
+```
+
+🛠 Configuração do Ambiente
+Se desejar rodar a aplicação localmente, você deve alterar as configurações no arquivo host.properties para apontar para seu ambiente local. Por padrão, a configuração está preparada para usar o ambiente de produção no Render.
+
+
+### 📦 Instalação das Dependências
+
+Use o Maven para instalar as dependências do projeto:
+
+```bash
+mvn clean install
+```
+
+Para iniciar a aplicação, execute:
+
+```bash
+mvn spring-boot:run
+```
+
+A API estará acessível via http://localhost:8080/.
+
+
+## 💻 Tecnologias Utilizadas
+
+- **Java 17** ☕: Versão atualizada do Java, oferecendo as mais recentes melhorias em performance e segurança.
+- **Spring Boot** 🌱: Facilita a criação de aplicações stand-alone baseadas em Spring com mínimo esforço de configuração.
+- **Spring Data JPA** 📚: Simplifica o acesso a dados em bancos de dados através do JPA.
+- **Spring Security** 🔐: Fornece autenticação e proteção para aplicações baseadas em Spring.
+- **PostgreSQL** 🐘: Banco de dados robusto e confiável.
+- **Hibernate** 🌿: Framework para mapeamento objeto-relacional que facilita a integração entre Java e bancos de dados.
+- **Lombok** 🧰: Biblioteca Java que usa anotações para minimizar o código boilerplate.
+
+## 🤝 Contribuindo
+
+Contribuições são o que fazem a comunidade open source um lugar incrível para aprender, inspirar e criar. Quaisquer contribuições que você fizer serão **muito apreciadas**.
+
+1. Faça um Fork do projeto
+2. Crie sua Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a Branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
+
+
+## 📬 Contato
+
+Arthur Felix - dev.felixarthur@gmail.com
+
+Projeto Link: [https://github.com/devfelixarthur/wineAPIService](https://github.com/devfelixarthur/wineAPIService)
