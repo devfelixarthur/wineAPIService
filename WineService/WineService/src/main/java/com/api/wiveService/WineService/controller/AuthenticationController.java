@@ -26,7 +26,6 @@ import java.time.format.DateTimeParseException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("auth")
 public class AuthenticationController {
