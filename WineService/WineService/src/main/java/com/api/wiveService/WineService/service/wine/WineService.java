@@ -3,13 +3,10 @@ package com.api.wiveService.WineService.service.wine;
 import com.api.wiveService.WineService.domain.avaliacao.bean.Avaliacao;
 import com.api.wiveService.WineService.domain.comments.bean.Comments;
 import com.api.wiveService.WineService.domain.comments.dto.CommentsDTO;
-import com.api.wiveService.WineService.domain.user.bean.User;
-import com.api.wiveService.WineService.domain.user.dto.ResponseUserDTO;
 import com.api.wiveService.WineService.domain.wine.bean.Wine;
 import com.api.wiveService.WineService.domain.wine.dto.*;
 import com.api.wiveService.WineService.exceptions.WineApiException;
 import com.api.wiveService.WineService.exceptions.WineException;
-import com.api.wiveService.WineService.exceptions.WineSucessException;
 import com.api.wiveService.WineService.repository.AvaliacaoRepository;
 import com.api.wiveService.WineService.repository.CommentRepository;
 import com.api.wiveService.WineService.repository.WineRepository;
@@ -175,6 +172,7 @@ public class WineService {
         return new WineDto(
                 wine.getId(),
                 wine.getNome(),
+                wine.getUva(),
                 wine.getPais(),
                 wine.getAdega(),
                 wine.getSafra(),
@@ -216,5 +214,71 @@ public class WineService {
                 .collect(Collectors.toList());
 
         return new ResponseCountryDTO((long) countries.size(), countries);
+    }
+
+    public ResponseAdegaDTO getAllAdegas() {
+        List<String> adegas = wineRepository.getAllAdegas();
+
+        ResponseAdegaDTO adegasDTO = new ResponseAdegaDTO();
+        adegasDTO.setTotalAdegas((long) adegas.size());
+        adegasDTO.setAdegas(adegas);
+
+        return adegasDTO;
+    }
+
+    public ResponseWineDTO getWinesByFields(int itemInicio, int itemFim, String wineName, String pais, String uva, String adega) {
+        if (wineName != null && wineName.length() < 3) {
+            throw new WineException("O Parâmetro wineName deve ter pelo menos 3 caracteres.", HttpStatus.BAD_REQUEST);
+        }
+
+        if (uva != null && uva.length() < 3) {
+            throw new WineException("O Parâmetro uva deve ter pelo menos 3 caracteres.", HttpStatus.BAD_REQUEST);
+        }
+
+        if (adega != null && adega.length() < 3) {
+            throw new WineException("O Parâmetro adega deve ter pelo menos 3 caracteres.", HttpStatus.BAD_REQUEST);
+        }
+
+        if ((itemInicio < 1) || (itemFim < 1) || (itemInicio > itemFim)) {
+            throw new WineException("Parâmetros de Paginação inválidos.", HttpStatus.BAD_REQUEST);
+        }
+
+        String paisCode = null;
+        if (pais != null) {
+            try {
+                Pais paisEnum = Pais.fromName(pais);
+                paisCode = paisEnum.getThreeDigitsCode();
+            } catch (WineApiException e) {
+                throw new WineException("País inválido.", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        int page = (itemInicio - 1) / itemFim;
+        int size = itemFim;
+
+        Page<Wine> winePage = wineRepository.findWinesByFields(wineName, paisCode, uva, adega, PageRequest.of(page, size));
+        List<WineDto> wineDtos = winePage.getContent().stream()
+                .map(this::convertToWineDto)
+                .collect(Collectors.toList());
+
+        wineDtos.forEach(wineDto -> {
+            List<Comments> comments = commentRepository.findByWineIdAndStatus(wineDto.getId());
+            List<CommentsDTO> commentsDtos = comments.stream()
+                    .map(comment -> new CommentsDTO(comment.getId(), comment.getUser().getId(), comment.getNomeUsuario(), comment.getDescricao(), comment.getDataCadastro()))
+                    .collect(Collectors.toList());
+            wineDto.setComments(commentsDtos);
+        });
+
+        return new ResponseWineDTO(winePage.getTotalElements(), wineDtos);
+    }
+
+    public ResponseUvasDTO getAllUvas() {
+        List<String> uvas = wineRepository.getAllUvas();
+
+        ResponseUvasDTO uvasDTO = new ResponseUvasDTO();
+        uvasDTO.setTotaluvas((long) uvas.size());
+        uvasDTO.setUvas(uvas);
+
+        return uvasDTO;
     }
 }

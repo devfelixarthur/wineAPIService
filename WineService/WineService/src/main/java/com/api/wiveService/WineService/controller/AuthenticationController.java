@@ -2,6 +2,7 @@ package com.api.wiveService.WineService.controller;
 
 import com.api.wiveService.WineService.config.security.TokenService;
 import com.api.wiveService.WineService.domain.user.dto.AuthenticationDTO;
+import com.api.wiveService.WineService.domain.user.dto.PasswordRecoveryDTO;
 import com.api.wiveService.WineService.domain.user.dto.RegisterUserDTO;
 import com.api.wiveService.WineService.domain.user.bean.User;
 import com.api.wiveService.WineService.domain.user.UserRole;
@@ -47,6 +48,7 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login){
         var usernamePassword = new UsernamePasswordAuthenticationToken(login.email(), login.password());
+
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
 
@@ -86,5 +88,46 @@ public class AuthenticationController {
 
         logger.info("Usuário Cadastrado com sucesso: {} ", newUser);
         return ResponsePadraoDTO.sucesso("Cadastro realizado com sucesso!");
+    }
+
+    @PostMapping("/recoveryPassword")
+    public ResponsePadraoDTO recoverPassword(@RequestBody @Valid PasswordRecoveryDTO data) {
+
+        User user = (User) userRepository.findByEmail(data.getEmail());
+
+        if (user == null) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(14), BAD_REQUEST);
+        }
+
+        if (!user.getNome().equalsIgnoreCase(data.getNome())) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(15), BAD_REQUEST);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dtNascimento;
+        try {
+            dtNascimento = LocalDate.parse(data.getDtNascimento(), formatter);
+        } catch (DateTimeParseException e) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(16), BAD_REQUEST);
+        }
+
+        if (!user.getDtNascimento().isEqual(dtNascimento)) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(16), BAD_REQUEST);
+        }
+
+        if (!data.getSenha().equals(data.getConfirmaSenha())) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(17), BAD_REQUEST);
+        }
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.matches(data.getSenha(), user.getPassword())) {
+            throw new WineException(new MsgCodWineApi().getCodigoErro(18), BAD_REQUEST);
+        }
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.getSenha());
+        user.setSenha(encryptedPassword);
+        userRepository.save(user);
+
+        return ResponsePadraoDTO.sucesso("Senha atualizada com sucesso!");
     }
 }

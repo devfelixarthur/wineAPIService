@@ -1,7 +1,6 @@
 package com.api.wiveService.WineService.controller;
 
-import com.api.wiveService.WineService.domain.user.dto.AlterarStatusUserDTO;
-import com.api.wiveService.WineService.domain.user.dto.ResponseUserDTO;
+
 import com.api.wiveService.WineService.domain.wine.dto.*;
 import com.api.wiveService.WineService.service.wine.WineService;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
@@ -37,6 +36,19 @@ public class WineController {
         return ResponseEntity.ok().body(responseWinesDto);
     }
 
+    @GetMapping("/buscaWineByFields")
+    public ResponseEntity<ResponseWineDTO> getAllWines(
+            @RequestParam(defaultValue = "1", required = false) int itemInicio,
+            @RequestParam(defaultValue = "25", required = false) int itemFim,
+            @RequestParam(required = false) String wineName,
+            @RequestParam(required = false) String pais,
+            @RequestParam(required = false) String uva,
+            @RequestParam(required = false) String adega) {
+        ResponseWineDTO responseWinesDto = wineService.getWinesByFields(itemInicio, itemFim, wineName, pais, uva, adega);
+        return ResponseEntity.ok().body(responseWinesDto);
+    }
+
+
     @PatchMapping("/alterarStatus")
     public ResponseEntity<ResponsePadraoDTO> alterarStatus(@RequestBody @Valid AlterarStatusWineDTO form) {
         ResponsePadraoDTO responsePadraoDTO = wineService.alterarStatus(form);
@@ -47,5 +59,17 @@ public class WineController {
     public ResponseEntity<ResponseCountryDTO> getAllCountries() {
         ResponseCountryDTO responseCountriesDto = wineService.getAllCountries();
         return ResponseEntity.ok().body(responseCountriesDto);
+    }
+
+    @GetMapping("/getAdegas")
+    public ResponseEntity<ResponseAdegaDTO> getAllAdegas() {
+        ResponseAdegaDTO responseAdegasDto = wineService.getAllAdegas();
+        return ResponseEntity.ok().body(responseAdegasDto);
+    }
+
+    @GetMapping("/getUvas")
+    public ResponseEntity<ResponseUvasDTO> getAllUvas() {
+        ResponseUvasDTO responseUvasDTO = wineService.getAllUvas();
+        return ResponseEntity.ok().body(responseUvasDTO);
     }
 }

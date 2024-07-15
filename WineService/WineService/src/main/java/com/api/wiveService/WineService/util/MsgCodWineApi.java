@@ -40,6 +40,11 @@ public class MsgCodWineApi {
         mapaCodigosErro.put(11, "Erro - Falha - Vinho não encontrado para o Id informado.");
         mapaCodigosErro.put(12, "Erro - Falha - Comment não encontrado para o Id informado.");
         mapaCodigosErro.put(13, "Erro - Falha - Avaliação não encontrado para o Id informado.");
+        mapaCodigosErro.put(14, "Erro - Falha - Usuário não encontrado para o email informado.");
+        mapaCodigosErro.put(15, "Erro - Falha - Nome Completo Inválido.");
+        mapaCodigosErro.put(16, "Erro - Falha - Data de Nascimento Inválida.");
+        mapaCodigosErro.put(17, "Erro - Falha - As senhas devem ser idênticas.");
+        mapaCodigosErro.put(18, "Erro - Falha - Senha utlizada anteriormente, escolha outra.");
 
     }
 }

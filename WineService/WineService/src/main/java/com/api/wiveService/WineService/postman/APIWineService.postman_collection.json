@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "97985957-acac-4ae8-b04e-a6d1f8676622",
+		"_postman_id": "8d10d178-80fd-42cb-8274-00a805a918a4",
 		"name": "APIWineService",
 		"description": "O projetoAPIWineService é uma API back-end para ser utilizada por uma rede social de vinhos. Essa API permite cadastro de usuários e a interação para cadastrar vinhos, comentários e avaliações.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -161,6 +161,123 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"titulo\": \"Sucesso\",\n    \"mensagem\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhdXRoLWFwaSIsInN1YiI6ImRldi5mZWxpeGFydGh1ckBnbWFpbC5jb20iLCJleHAiOjE3MjA0NjkxNDV9.NbXmqdhYs-CvGZ1ejGYXBZs4VgO4H9ZxjZ-0LF2JzG0\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Recovery Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"User Tester\",\r\n    \"email\" :\"tester@tester.com.br\",\r\n    \"dtNascimento\" : \"11/11/2023\",\r\n    \"senha\" : \"123456\",\r\n    \"confirmaSenha\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/recoveryPassword",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"recoveryPassword"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Validate Token",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\":\"User Tester\",\r\n    \"email\" :\"tester@tester.com.br\",\r\n    \"dtNascimento\" : \"11/11/2023\",\r\n    \"senha\" : \"123456\",\r\n    \"confirmaSenha\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/auth/recoveryPassword",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"auth",
+										"recoveryPassword"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 17:54:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"titulo\": \"Sucesso\",\n    \"mensagem\": \"Senha atualizada com sucesso!\"\n}"
 						}
 					]
 				}
@@ -749,7 +866,10 @@
 					]
 				},
 				{
-					"name": "Buscar Todos Users",
+					"name": "Buscar Todos os Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -763,6 +883,15 @@
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseURL}}/user/buscarTodosUsuarios?itemInicio=1&itemFim=10",
 							"host": [
@@ -1605,6 +1734,367 @@
 							"body": "{\n    \"totalCountries\": 246,\n    \"countries\": [\n        {\n            \"sigla\": \"AFG\",\n            \"nome\": \"Afeganistão\"\n        },\n        {\n            \"sigla\": \"ZAF\",\n            \"nome\": \"África do Sul\"\n        },\n        {\n            \"sigla\": \"ALB\",\n            \"nome\": \"Albânia\"\n        },\n        {\n            \"sigla\": \"DEU\",\n            \"nome\": \"Alemanha\"\n        },\n        {\n            \"sigla\": \"AND\",\n            \"nome\": \"Andorra\"\n        },\n        {\n            \"sigla\": \"AGO\",\n            \"nome\": \"Angola\"\n        },\n        {\n            \"sigla\": \"AIA\",\n            \"nome\": \"Anguilla\"\n        },\n        {\n            \"sigla\": \"ATA\",\n            \"nome\": \"Antártida\"\n        },\n        {\n            \"sigla\": \"ATG\",\n            \"nome\": \"Antígua e Barbuda\"\n        },\n        {\n            \"sigla\": \"ANT\",\n            \"nome\": \"Antilhas Holandesas\"\n        },\n        {\n            \"sigla\": \"SAU\",\n            \"nome\": \"Arábia Saudita\"\n        },\n        {\n            \"sigla\": \"DZA\",\n            \"nome\": \"Argélia\"\n        },\n        {\n            \"sigla\": \"ARG\",\n            \"nome\": \"Argentina\"\n        },\n        {\n            \"sigla\": \"ARM\",\n            \"nome\": \"Armênia\"\n        },\n        {\n            \"sigla\": \"ABW\",\n            \"nome\": \"Aruba\"\n        },\n        {\n            \"sigla\": \"AUS\",\n            \"nome\": \"Austrália\"\n        },\n        {\n            \"sigla\": \"AUT\",\n            \"nome\": \"Áustria\"\n        },\n        {\n            \"sigla\": \"AZE\",\n            \"nome\": \"Azerbaijão\"\n        },\n        {\n            \"sigla\": \"BHS\",\n            \"nome\": \"Bahamas\"\n        },\n        {\n            \"sigla\": \"BHR\",\n            \"nome\": \"Bahrein\"\n        },\n        {\n            \"sigla\": \"BGD\",\n            \"nome\": \"Bangladesh\"\n        },\n        {\n            \"sigla\": \"BRB\",\n            \"nome\": \"Barbados\"\n        },\n        {\n            \"sigla\": \"BLR\",\n            \"nome\": \"Belarus\"\n        },\n        {\n            \"sigla\": \"BEL\",\n            \"nome\": \"Bélgica\"\n        },\n        {\n            \"sigla\": \"BLZ\",\n            \"nome\": \"Belize\"\n        },\n        {\n            \"sigla\": \"BEN\",\n            \"nome\": \"Benin\"\n        },\n        {\n            \"sigla\": \"BMU\",\n            \"nome\": \"Bermudas\"\n        },\n        {\n            \"sigla\": \"BOL\",\n            \"nome\": \"Bolívia\"\n        },\n        {\n            \"sigla\": \"BIH\",\n            \"nome\": \"Bósnia-Herzegóvina\"\n        },\n        {\n            \"sigla\": \"BWA\",\n            \"nome\": \"Botsuana\"\n        },\n        {\n            \"sigla\": \"BRA\",\n            \"nome\": \"Brasil\"\n        },\n        {\n            \"sigla\": \"BRN\",\n            \"nome\": \"Brunei\"\n        },\n        {\n            \"sigla\": \"BGR\",\n            \"nome\": \"Bulgária\"\n        },\n        {\n            \"sigla\": \"BFA\",\n            \"nome\": \"Burkina Fasso\"\n        },\n        {\n            \"sigla\": \"BDI\",\n            \"nome\": \"Burundi\"\n        },\n        {\n            \"sigla\": \"BTN\",\n            \"nome\": \"Butão\"\n        },\n        {\n            \"sigla\": \"CPV\",\n            \"nome\": \"Cabo Verde\"\n        },\n        {\n            \"sigla\": \"CMR\",\n            \"nome\": \"Camarões\"\n        },\n        {\n            \"sigla\": \"KHM\",\n            \"nome\": \"Camboja\"\n        },\n        {\n            \"sigla\": \"CAN\",\n            \"nome\": \"Canadá\"\n        },\n        {\n            \"sigla\": \"KAZ\",\n            \"nome\": \"Cazaquistão\"\n        },\n        {\n            \"sigla\": \"TCD\",\n            \"nome\": \"Chade\"\n        },\n        {\n            \"sigla\": \"CHL\",\n            \"nome\": \"Chile\"\n        },\n        {\n            \"sigla\": \"CHN\",\n            \"nome\": \"China\"\n        },\n        {\n            \"sigla\": \"CYP\",\n            \"nome\": \"Chipre\"\n        },\n        {\n            \"sigla\": \"SGP\",\n            \"nome\": \"Cingapura\"\n        },\n        {\n            \"sigla\": \"COL\",\n            \"nome\": \"Colômbia\"\n        },\n        {\n            \"sigla\": \"COG\",\n            \"nome\": \"Congo\"\n        },\n        {\n            \"sigla\": \"PRK\",\n            \"nome\": \"Coréia do Norte\"\n        },\n        {\n            \"sigla\": \"KOR\",\n            \"nome\": \"Coréia do Sul\"\n        },\n        {\n            \"sigla\": \"CIV\",\n            \"nome\": \"Costa do Marfim\"\n        },\n        {\n            \"sigla\": \"CRI\",\n            \"nome\": \"Costa Rica\"\n        },\n        {\n            \"sigla\": \"HRV\",\n            \"nome\": \"Croácia (Hrvatska)\"\n        },\n        {\n            \"sigla\": \"CUB\",\n            \"nome\": \"Cuba\"\n        },\n        {\n            \"sigla\": \"DNK\",\n            \"nome\": \"Dinamarca\"\n        },\n        {\n            \"sigla\": \"DJI\",\n            \"nome\": \"Djibuti\"\n        },\n        {\n            \"sigla\": \"DMA\",\n            \"nome\": \"Dominica\"\n        },\n        {\n            \"sigla\": \"EGY\",\n            \"nome\": \"Egito\"\n        },\n        {\n            \"sigla\": \"SLV\",\n            \"nome\": \"El Salvador\"\n        },\n        {\n            \"sigla\": \"ARE\",\n            \"nome\": \"Emirados Árabes Unidos\"\n        },\n        {\n            \"sigla\": \"ECU\",\n            \"nome\": \"Equador\"\n        },\n        {\n            \"sigla\": \"ERI\",\n            \"nome\": \"Eritréia\"\n        },\n        {\n            \"sigla\": \"SVK\",\n            \"nome\": \"Eslováquia\"\n        },\n        {\n            \"sigla\": \"SVN\",\n            \"nome\": \"Eslovênia\"\n        },\n        {\n            \"sigla\": \"ESP\",\n            \"nome\": \"Espanha\"\n        },\n        {\n            \"sigla\": \"USA\",\n            \"nome\": \"Estados Unidos\"\n        },\n        {\n            \"sigla\": \"EST\",\n            \"nome\": \"Estônia\"\n        },\n        {\n            \"sigla\": \"ETH\",\n            \"nome\": \"Etiópia\"\n        },\n        {\n            \"sigla\": \"FJI\",\n            \"nome\": \"Fiji\"\n        },\n        {\n            \"sigla\": \"PHL\",\n            \"nome\": \"Filipinas\"\n        },\n        {\n            \"sigla\": \"FIN\",\n            \"nome\": \"Finlândia\"\n        },\n        {\n            \"sigla\": \"FRA\",\n            \"nome\": \"França\"\n        },\n        {\n            \"sigla\": \"GAB\",\n            \"nome\": \"Gabão\"\n        },\n        {\n            \"sigla\": \"GMB\",\n            \"nome\": \"Gâmbia\"\n        },\n        {\n            \"sigla\": \"GHA\",\n            \"nome\": \"Gana\"\n        },\n        {\n            \"sigla\": \"GEO\",\n            \"nome\": \"Geórgia\"\n        },\n        {\n            \"sigla\": \"GIB\",\n            \"nome\": \"Gibraltar\"\n        },\n        {\n            \"sigla\": \"GBR\",\n            \"nome\": \"Grã-Bretanha (Reino Unido, UK)\"\n        },\n        {\n            \"sigla\": \"GRD\",\n            \"nome\": \"Granada\"\n        },\n        {\n            \"sigla\": \"GRC\",\n            \"nome\": \"Grécia\"\n        },\n        {\n            \"sigla\": \"GRL\",\n            \"nome\": \"Groelândia\"\n        },\n        {\n            \"sigla\": \"GLP\",\n            \"nome\": \"Guadalupe\"\n        },\n        {\n            \"sigla\": \"GUM\",\n            \"nome\": \"Guam (Território dos Estados Unidos)\"\n        },\n        {\n            \"sigla\": \"GTM\",\n            \"nome\": \"Guatemala\"\n        },\n        {\n            \"sigla\": \"GGY\",\n            \"nome\": \"Guernsey\"\n        },\n        {\n            \"sigla\": \"GUY\",\n            \"nome\": \"Guiana\"\n        },\n        {\n            \"sigla\": \"GUF\",\n            \"nome\": \"Guiana Francesa\"\n        },\n        {\n            \"sigla\": \"GIN\",\n            \"nome\": \"Guiné\"\n        },\n        {\n            \"sigla\": \"GNQ\",\n            \"nome\": \"Guiné Equatorial\"\n        },\n        {\n            \"sigla\": \"GNB\",\n            \"nome\": \"Guiné-Bissau\"\n        },\n        {\n            \"sigla\": \"HTI\",\n            \"nome\": \"Haiti\"\n        },\n        {\n            \"sigla\": \"NLD\",\n            \"nome\": \"Holanda\"\n        },\n        {\n            \"sigla\": \"HND\",\n            \"nome\": \"Honduras\"\n        },\n        {\n            \"sigla\": \"HKG\",\n            \"nome\": \"Hong Kong\"\n        },\n        {\n            \"sigla\": \"HUN\",\n            \"nome\": \"Hungria\"\n        },\n        {\n            \"sigla\": \"YEM\",\n            \"nome\": \"Iêmen\"\n        },\n        {\n            \"sigla\": \"BVT\",\n            \"nome\": \"Ilha Bouvet (Território da Noruega)\"\n        },\n        {\n            \"sigla\": \"IMN\",\n            \"nome\": \"Ilha do Homem\"\n        },\n        {\n            \"sigla\": \"CXR\",\n            \"nome\": \"Ilha Natal\"\n        },\n        {\n            \"sigla\": \"PCN\",\n            \"nome\": \"Ilha Pitcairn\"\n        },\n        {\n            \"sigla\": \"REU\",\n            \"nome\": \"Ilha Reunião\"\n        },\n        {\n            \"sigla\": \"ALA\",\n            \"nome\": \"Ilhas Aland\"\n        },\n        {\n            \"sigla\": \"CYM\",\n            \"nome\": \"Ilhas Cayman\"\n        },\n        {\n            \"sigla\": \"CCK\",\n            \"nome\": \"Ilhas Cocos\"\n        },\n        {\n            \"sigla\": \"COM\",\n            \"nome\": \"Ilhas Comores\"\n        },\n        {\n            \"sigla\": \"COK\",\n            \"nome\": \"Ilhas Cook\"\n        },\n        {\n            \"sigla\": \"FRO\",\n            \"nome\": \"Ilhas Faroes\"\n        },\n        {\n            \"sigla\": \"FLK\",\n            \"nome\": \"Ilhas Falkland (Malvinas)\"\n        },\n        {\n            \"sigla\": \"SGS\",\n            \"nome\": \"Ilhas Geórgia do Sul e Sandwich do Sul\"\n        },\n        {\n            \"sigla\": \"HMD\",\n            \"nome\": \"Ilhas Heard e McDonald (Território da Austrália)\"\n        },\n        {\n            \"sigla\": \"MNP\",\n            \"nome\": \"Ilhas Marianas do Norte\"\n        },\n        {\n            \"sigla\": \"MHL\",\n            \"nome\": \"Ilhas Marshall\"\n        },\n        {\n            \"sigla\": \"UMI\",\n            \"nome\": \"Ilhas Menores dos Estados Unidos\"\n        },\n        {\n            \"sigla\": \"NFK\",\n            \"nome\": \"Ilhas Norfolk\"\n        },\n        {\n            \"sigla\": \"SYC\",\n            \"nome\": \"Ilhas Seychelles\"\n        },\n        {\n            \"sigla\": \"SLB\",\n            \"nome\": \"Ilhas Solomão\"\n        },\n        {\n            \"sigla\": \"SJM\",\n            \"nome\": \"Ilhas Svalbard e Jan Mayen\"\n        },\n        {\n            \"sigla\": \"TKL\",\n            \"nome\": \"Ilhas Tokelau\"\n        },\n        {\n            \"sigla\": \"TCA\",\n            \"nome\": \"Ilhas Turks e Caicos\"\n        },\n        {\n            \"sigla\": \"VIR\",\n            \"nome\": \"Ilhas Virgens (Estados Unidos)\"\n        },\n        {\n            \"sigla\": \"VGB\",\n            \"nome\": \"Ilhas Virgens (Inglaterra)\"\n        },\n        {\n            \"sigla\": \"WLF\",\n            \"nome\": \"Ilhas Wallis e Futuna\"\n        },\n        {\n            \"sigla\": \"IND\",\n            \"nome\": \"índia\"\n        },\n        {\n            \"sigla\": \"IDN\",\n            \"nome\": \"Indonésia\"\n        },\n        {\n            \"sigla\": \"IRN\",\n            \"nome\": \"Irã\"\n        },\n        {\n            \"sigla\": \"IRQ\",\n            \"nome\": \"Iraque\"\n        },\n        {\n            \"sigla\": \"IRL\",\n            \"nome\": \"Irlanda\"\n        },\n        {\n            \"sigla\": \"ISL\",\n            \"nome\": \"Islândia\"\n        },\n        {\n            \"sigla\": \"ISR\",\n            \"nome\": \"Israel\"\n        },\n        {\n            \"sigla\": \"ITA\",\n            \"nome\": \"Itália\"\n        },\n        {\n            \"sigla\": \"JAM\",\n            \"nome\": \"Jamaica\"\n        },\n        {\n            \"sigla\": \"JPN\",\n            \"nome\": \"Japão\"\n        },\n        {\n            \"sigla\": \"JEY\",\n            \"nome\": \"Jersey\"\n        },\n        {\n            \"sigla\": \"JOR\",\n            \"nome\": \"Jordânia\"\n        },\n        {\n            \"sigla\": \"KEN\",\n            \"nome\": \"Kênia\"\n        },\n        {\n            \"sigla\": \"KIR\",\n            \"nome\": \"Kiribati\"\n        },\n        {\n            \"sigla\": \"KWT\",\n            \"nome\": \"Kuait\"\n        },\n        {\n            \"sigla\": \"LAO\",\n            \"nome\": \"Laos\"\n        },\n        {\n            \"sigla\": \"LVA\",\n            \"nome\": \"Látvia\"\n        },\n        {\n            \"sigla\": \"LSO\",\n            \"nome\": \"Lesoto\"\n        },\n        {\n            \"sigla\": \"LBN\",\n            \"nome\": \"Líbano\"\n        },\n        {\n            \"sigla\": \"LBR\",\n            \"nome\": \"Libéria\"\n        },\n        {\n            \"sigla\": \"LBY\",\n            \"nome\": \"Líbia\"\n        },\n        {\n            \"sigla\": \"LIE\",\n            \"nome\": \"Liechtenstein\"\n        },\n        {\n            \"sigla\": \"LTU\",\n            \"nome\": \"Lituânia\"\n        },\n        {\n            \"sigla\": \"LUX\",\n            \"nome\": \"Luxemburgo\"\n        },\n        {\n            \"sigla\": \"MAC\",\n            \"nome\": \"Macau\"\n        },\n        {\n            \"sigla\": \"MKD\",\n            \"nome\": \"Macedônia (República Yugoslava)\"\n        },\n        {\n            \"sigla\": \"MDG\",\n            \"nome\": \"Madagascar\"\n        },\n        {\n            \"sigla\": \"MYS\",\n            \"nome\": \"Malásia\"\n        },\n        {\n            \"sigla\": \"MWI\",\n            \"nome\": \"Malaui\"\n        },\n        {\n            \"sigla\": \"MDV\",\n            \"nome\": \"Maldivas\"\n        },\n        {\n            \"sigla\": \"MLI\",\n            \"nome\": \"Mali\"\n        },\n        {\n            \"sigla\": \"MLT\",\n            \"nome\": \"Malta\"\n        },\n        {\n            \"sigla\": \"MAR\",\n            \"nome\": \"Marrocos\"\n        },\n        {\n            \"sigla\": \"MTQ\",\n            \"nome\": \"Martinica\"\n        },\n        {\n            \"sigla\": \"MUS\",\n            \"nome\": \"Maurício\"\n        },\n        {\n            \"sigla\": \"MRT\",\n            \"nome\": \"Mauritânia\"\n        },\n        {\n            \"sigla\": \"MYT\",\n            \"nome\": \"Mayotte\"\n        },\n        {\n            \"sigla\": \"MEX\",\n            \"nome\": \"México\"\n        },\n        {\n            \"sigla\": \"FSM\",\n            \"nome\": \"Micronésia\"\n        },\n        {\n            \"sigla\": \"MOZ\",\n            \"nome\": \"Moçambique\"\n        },\n        {\n            \"sigla\": \"MDA\",\n            \"nome\": \"Moldova\"\n        },\n        {\n            \"sigla\": \"MCO\",\n            \"nome\": \"Mônaco\"\n        },\n        {\n            \"sigla\": \"MNG\",\n            \"nome\": \"Mongólia\"\n        },\n        {\n            \"sigla\": \"MNE\",\n            \"nome\": \"Montenegro\"\n        },\n        {\n            \"sigla\": \"MSR\",\n            \"nome\": \"Montserrat\"\n        },\n        {\n            \"sigla\": \"MMR\",\n            \"nome\": \"Myanma\"\n        },\n        {\n            \"sigla\": \"NAM\",\n            \"nome\": \"Namíbia\"\n        },\n        {\n            \"sigla\": \"NRU\",\n            \"nome\": \"Nauru\"\n        },\n        {\n            \"sigla\": \"NPL\",\n            \"nome\": \"Nepal\"\n        },\n        {\n            \"sigla\": \"NIC\",\n            \"nome\": \"Nicarágua\"\n        },\n        {\n            \"sigla\": \"NER\",\n            \"nome\": \"Níger\"\n        },\n        {\n            \"sigla\": \"NGA\",\n            \"nome\": \"Nigéria\"\n        },\n        {\n            \"sigla\": \"NIU\",\n            \"nome\": \"Niue\"\n        },\n        {\n            \"sigla\": \"NOR\",\n            \"nome\": \"Noruega\"\n        },\n        {\n            \"sigla\": \"NCL\",\n            \"nome\": \"Nova Caledônia\"\n        },\n        {\n            \"sigla\": \"NZL\",\n            \"nome\": \"Nova Zelândia\"\n        },\n        {\n            \"sigla\": \"OMN\",\n            \"nome\": \"Omã\"\n        },\n        {\n            \"sigla\": \"PLW\",\n            \"nome\": \"Palau\"\n        },\n        {\n            \"sigla\": \"PAN\",\n            \"nome\": \"Panamá\"\n        },\n        {\n            \"sigla\": \"PNG\",\n            \"nome\": \"Papua-Nova Guiné\"\n        },\n        {\n            \"sigla\": \"PAK\",\n            \"nome\": \"Paquistão\"\n        },\n        {\n            \"sigla\": \"PRY\",\n            \"nome\": \"Paraguai\"\n        },\n        {\n            \"sigla\": \"PER\",\n            \"nome\": \"Peru\"\n        },\n        {\n            \"sigla\": \"PYF\",\n            \"nome\": \"Polinésia Francesa\"\n        },\n        {\n            \"sigla\": \"POL\",\n            \"nome\": \"Polônia\"\n        },\n        {\n            \"sigla\": \"PRI\",\n            \"nome\": \"Porto Rico\"\n        },\n        {\n            \"sigla\": \"PRT\",\n            \"nome\": \"Portugal\"\n        },\n        {\n            \"sigla\": \"QAT\",\n            \"nome\": \"Qatar\"\n        },\n        {\n            \"sigla\": \"KGZ\",\n            \"nome\": \"Quirguistão\"\n        },\n        {\n            \"sigla\": \"CAF\",\n            \"nome\": \"República Centro-Africana\"\n        },\n        {\n            \"sigla\": \"COD\",\n            \"nome\": \"República Democrática do Congo\"\n        },\n        {\n            \"sigla\": \"DOM\",\n            \"nome\": \"República Dominicana\"\n        },\n        {\n            \"sigla\": \"CZE\",\n            \"nome\": \"República Tcheca\"\n        },\n        {\n            \"sigla\": \"ROM\",\n            \"nome\": \"Romênia\"\n        },\n        {\n            \"sigla\": \"RWA\",\n            \"nome\": \"Ruanda\"\n        },\n        {\n            \"sigla\": \"RUS\",\n            \"nome\": \"Rússia (antiga URSS) - Federação Russa\"\n        },\n        {\n            \"sigla\": \"ESH\",\n            \"nome\": \"Saara Ocidental\"\n        },\n        {\n            \"sigla\": \"VCT\",\n            \"nome\": \"Saint Vincente e Granadinas\"\n        },\n        {\n            \"sigla\": \"ASM\",\n            \"nome\": \"Samoa Americana\"\n        },\n        {\n            \"sigla\": \"WSM\",\n            \"nome\": \"Samoa Ocidental\"\n        },\n        {\n            \"sigla\": \"SMR\",\n            \"nome\": \"San Marino\"\n        },\n        {\n            \"sigla\": \"SHN\",\n            \"nome\": \"Santa Helena\"\n        },\n        {\n            \"sigla\": \"LCA\",\n            \"nome\": \"Santa Lúcia\"\n        },\n        {\n            \"sigla\": \"BLM\",\n            \"nome\": \"São Bartolomeu\"\n        },\n        {\n            \"sigla\": \"KNA\",\n            \"nome\": \"São Cristóvão e Névis\"\n        },\n        {\n            \"sigla\": \"MAF\",\n            \"nome\": \"São Martim\"\n        },\n        {\n            \"sigla\": \"STP\",\n            \"nome\": \"São Tomé e Príncipe\"\n        },\n        {\n            \"sigla\": \"SEN\",\n            \"nome\": \"Senegal\"\n        },\n        {\n            \"sigla\": \"SLE\",\n            \"nome\": \"Serra Leoa\"\n        },\n        {\n            \"sigla\": \"SRB\",\n            \"nome\": \"Sérvia\"\n        },\n        {\n            \"sigla\": \"SYR\",\n            \"nome\": \"Síria\"\n        },\n        {\n            \"sigla\": \"SOM\",\n            \"nome\": \"Somália\"\n        },\n        {\n            \"sigla\": \"LKA\",\n            \"nome\": \"Sri Lanka\"\n        },\n        {\n            \"sigla\": \"SPM\",\n            \"nome\": \"St. Pierre and Miquelon\"\n        },\n        {\n            \"sigla\": \"SWZ\",\n            \"nome\": \"Suazilândia\"\n        },\n        {\n            \"sigla\": \"SDN\",\n            \"nome\": \"Sudão\"\n        },\n        {\n            \"sigla\": \"SWE\",\n            \"nome\": \"Suécia\"\n        },\n        {\n            \"sigla\": \"CHE\",\n            \"nome\": \"Suíça\"\n        },\n        {\n            \"sigla\": \"SUR\",\n            \"nome\": \"Suriname\"\n        },\n        {\n            \"sigla\": \"TJK\",\n            \"nome\": \"Tadjiquistão\"\n        },\n        {\n            \"sigla\": \"THA\",\n            \"nome\": \"Tailândia\"\n        },\n        {\n            \"sigla\": \"TWN\",\n            \"nome\": \"Taiwan\"\n        },\n        {\n            \"sigla\": \"TZA\",\n            \"nome\": \"Tanzânia\"\n        },\n        {\n            \"sigla\": \"IOT\",\n            \"nome\": \"Território Britânico do Oceano índico\"\n        },\n        {\n            \"sigla\": \"ATF\",\n            \"nome\": \"Territórios do Sul da França\"\n        },\n        {\n            \"sigla\": \"PSE\",\n            \"nome\": \"Territórios Palestinos Ocupados\"\n        },\n        {\n            \"sigla\": \"TMP\",\n            \"nome\": \"Timor Leste\"\n        },\n        {\n            \"sigla\": \"TGO\",\n            \"nome\": \"Togo\"\n        },\n        {\n            \"sigla\": \"TON\",\n            \"nome\": \"Tonga\"\n        },\n        {\n            \"sigla\": \"TTO\",\n            \"nome\": \"Trinidad and Tobago\"\n        },\n        {\n            \"sigla\": \"TUN\",\n            \"nome\": \"Tunísia\"\n        },\n        {\n            \"sigla\": \"TKM\",\n            \"nome\": \"Turcomenistão\"\n        },\n        {\n            \"sigla\": \"TUR\",\n            \"nome\": \"Turquia\"\n        },\n        {\n            \"sigla\": \"TUV\",\n            \"nome\": \"Tuvalu\"\n        },\n        {\n            \"sigla\": \"UKR\",\n            \"nome\": \"Ucrânia\"\n        },\n        {\n            \"sigla\": \"UGA\",\n            \"nome\": \"Uganda\"\n        },\n        {\n            \"sigla\": \"URY\",\n            \"nome\": \"Uruguai\"\n        },\n        {\n            \"sigla\": \"UZB\",\n            \"nome\": \"Uzbequistão\"\n        },\n        {\n            \"sigla\": \"VUT\",\n            \"nome\": \"Vanuatu\"\n        },\n        {\n            \"sigla\": \"VAT\",\n            \"nome\": \"Vaticano\"\n        },\n        {\n            \"sigla\": \"VEN\",\n            \"nome\": \"Venezuela\"\n        },\n        {\n            \"sigla\": \"VNM\",\n            \"nome\": \"Vietnã\"\n        },\n        {\n            \"sigla\": \"ZMB\",\n            \"nome\": \"Zâmbia\"\n        },\n        {\n            \"sigla\": \"ZWE\",\n            \"nome\": \"Zimbábue\"\n        }\n    ]\n}"
 						}
 					]
+				},
+				{
+					"name": "Buscar Adegas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TokenAPI}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/wine/getAdegas",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"wine",
+								"getAdegas"
+							]
+						},
+						"description": "**Descrição**: Lista todas adegas associadas aos vinhos ativos"
+					},
+					"response": [
+						{
+							"name": "Buscar Adegas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "baseUrl/wine/getAdegas",
+									"host": [
+										"baseUrl"
+									],
+									"path": [
+										"wine",
+										"getAdegas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 15:24:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalAdegas\": 1,\n    \"adegas\": [\n        \"Concha Y Toro\"\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Buscar Wines By Fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TokenAPI}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/wine/buscaWineByFields?itemInicio=1&itemFim=80&pais=Argentina&uva=Cabernet&wineName=Reservado&adega=Concha",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"wine",
+								"buscaWineByFields"
+							],
+							"query": [
+								{
+									"key": "itemInicio",
+									"value": "1"
+								},
+								{
+									"key": "itemFim",
+									"value": "80"
+								},
+								{
+									"key": "pais",
+									"value": "Argentina"
+								},
+								{
+									"key": "uva",
+									"value": "Cabernet"
+								},
+								{
+									"key": "wineName",
+									"value": "Reservado"
+								},
+								{
+									"key": "adega",
+									"value": "Concha"
+								}
+							]
+						},
+						"description": "**Descrição**: Filtro de busca que retorna uma lista de todos os vinhos cadastrados entre os índices especificados. Requer autenticação.  \nPermite paginação passando itemInicio e itemFim, caso não seja informado, por default retornará somente alguns vinhos cadastrados.  \nOS parâmtros de busca são pais, wineName ou uva, todos são ocionais e podem ser concatenados."
+					},
+					"response": [
+						{
+							"name": "Buscar Wines By Fields",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/wine/buscaWineByFields?itemInicio=1&itemFim=80&pais=Argentina&uva=Cabernet&wineName=Reservado&adega=Concha",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"wine",
+										"buscaWineByFields"
+									],
+									"query": [
+										{
+											"key": "itemInicio",
+											"value": "1"
+										},
+										{
+											"key": "itemFim",
+											"value": "80"
+										},
+										{
+											"key": "pais",
+											"value": "Argentina"
+										},
+										{
+											"key": "uva",
+											"value": "Cabernet"
+										},
+										{
+											"key": "wineName",
+											"value": "Reservado"
+										},
+										{
+											"key": "adega",
+											"value": "Concha"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 17:13:14 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totalWine\": 1,\n    \"wines\": [\n        {\n            \"id\": 2,\n            \"nome\": \"Reservado2\",\n            \"uva\": \"Cabernet Sauvignon\",\n            \"pais\": \"ARG\",\n            \"adega\": \"Concha Y Toro\",\n            \"safra\": 2019,\n            \"imagem\": \"https://i.ibb.co/XVHJvm7/094e2212ef0e.jpg\",\n            \"avaliacao\": 0,\n            \"qtdAvaliacao\": 0,\n            \"status\": \"Ativo\",\n            \"dataCadastro\": \"2024-07-08T17:07:35.803291\",\n            \"comments\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Buscar Uvas",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Buscar Uvas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/wine/getUvas",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"wine",
+										"getUvas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jul 2024 17:22:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"totaluvas\": 1,\n    \"uvas\": [\n        \"Cabernet Sauvignon\"\n    ]\n}"
+						}
+					]
 				}
 			],
 			"description": "Rota da API responsável por toda requsição afim de realizar a manipulação de cadastro de vinhos, como cadastro, edição, alteração de status e buscas."
@@ -2120,15 +2610,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "https://wineapiservice.onrender.com/comments/getAllComments?itemInicio=1&itemFim=2",
 									"protocol": "https",
@@ -2300,15 +2781,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "https://wineapiservice.onrender.com/comments/commentsByWine?wineId=1",
 									"protocol": "https",
@@ -2778,15 +3250,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idAvaliacao\" : 1,\r\n    \"avaliacao\": 4\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "https://wineapiservice.onrender.com/avaliacoes/all",
 									"protocol": "https",
@@ -2938,15 +3401,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"idAvaliacao\" : 1,\r\n    \"avaliacao\": 4\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "https://wineapiservice.onrender.com/avaliacoes/avaliacaoByWine?wineId=1",
 									"protocol": "https",
