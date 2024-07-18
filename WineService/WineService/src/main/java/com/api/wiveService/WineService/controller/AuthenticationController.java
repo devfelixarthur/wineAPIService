@@ -10,6 +10,13 @@ import com.api.wiveService.WineService.exceptions.WineException;
 import com.api.wiveService.WineService.repository.UserRepository;
 import com.api.wiveService.WineService.util.MsgCodWineApi;
 import com.api.wiveService.WineService.util.ResponsePadraoDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +35,11 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("auth")
+@Tag(name = "Autenticação", description = "Operaçãoes de Autenticação, cadastro de usuários e recuperação de senha.")
 public class AuthenticationController {
 
     @Autowired
-     private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private UserRepository userRepository;
@@ -42,8 +50,15 @@ public class AuthenticationController {
     private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
 
 
+    @Operation(summary = "Login do usuário", description = "Authenticate o usuário e retorna um token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Login Realizado com Sucesso.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Dados Inválidos", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Erro na solicitação.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class)))
+    })
     @PostMapping("/login")
-    public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login){
+    public ResponsePadraoDTO login(@RequestBody @Valid AuthenticationDTO login) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(login.email(), login.password());
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -54,6 +69,12 @@ public class AuthenticationController {
         return ResponsePadraoDTO.sucesso(token);
     }
 
+    @Operation(summary = "Cadastro do usuário", description = "Endpoint resposável pelo cadastro de um novo usuário.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cadastro Realizado com Sucesso.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Dados Inválidos", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Erro na solicitação.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class)))
+    })
     @PostMapping("/register")
     public ResponsePadraoDTO register(@RequestBody @Valid RegisterUserDTO data) {
 
@@ -87,6 +108,13 @@ public class AuthenticationController {
         return ResponsePadraoDTO.sucesso("Cadastro realizado com sucesso!");
     }
 
+    @Operation(summary = "Recuperação de Senha", description = "Endpoint responsável pela recuperação de senha.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Dados alterado com Sucesso.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Dados Inválidos", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class))),
+            @ApiResponse(responseCode = "500", description = "Erro na solicitação.", content = @Content(schema = @Schema(implementation = ResponsePadraoDTO.class)))
+    })
     @PostMapping("/recoveryPassword")
     public ResponsePadraoDTO recoverPassword(@RequestBody @Valid PasswordRecoveryDTO data) {
 
