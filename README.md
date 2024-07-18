@@ -6,7 +6,8 @@ WineService é uma API destinada a alimentar uma rede social de vinhos, oferecen
 
 ## 📖 Documentação da API
 
-A documentação completa da API está disponível no Postman: [Visualizar Documentação](https://documenter.getpostman.com/view/24823254/2sA3e2eUGE)
+A documentação completa da API está disponível no Swagger: [Visualizar Documentação.](https://wineapiservice.onrender.com/swagger-ui/index.html?urls.primaryName=User+Operations#/)
+Obs: Para acessar a documentação local a API deve estar rodando e ser acessada [neste link.](http://localhost:8080/swagger-ui/index.html?urls.primaryName=User+Operations#/)
 
 ## 🚀 Pré-requisitos
 
