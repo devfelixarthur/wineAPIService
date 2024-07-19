@@ -12,6 +12,9 @@ public record CadastrarWineDTO(
         @Size(min=3, message = "O campo nome deve ter no mínimo 3 caracteres.")
         String nome,
 
+        @NotNull(message = "O campo descricao é obrigatório.")
+        @Size(min=3, message = "O campo descricao deve ter no mínimo 3 caracteres.")
+        String descricao,
 
         @NotNull(message = "O campo país é obrigatório.")
         @Size(min=3, message = "O campo país deve ter no mínimo 3 caracteres.")
