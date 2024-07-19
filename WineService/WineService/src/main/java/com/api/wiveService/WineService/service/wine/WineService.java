@@ -172,6 +172,7 @@ public class WineService {
         return new WineDto(
                 wine.getId(),
                 wine.getNome(),
+                wine.getDescricao(),
                 wine.getUva(),
                 wine.getPais(),
                 wine.getAdega(),

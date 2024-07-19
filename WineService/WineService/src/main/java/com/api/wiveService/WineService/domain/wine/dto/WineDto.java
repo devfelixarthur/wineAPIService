@@ -20,6 +20,7 @@ import java.util.List;
 public class WineDto {
     private Long id;
     private String nome;
+    private String descricao;
     private String uva;
     private String pais;
     private String adega;

@@ -27,6 +27,8 @@ public class Wine {
     @Column(length = 255)
     private String nome;
 
+    private String descricao;
+
     @NotNull(message = "O país é obrigatório.")
     @Size(min = 1, max = 100, message = "O país deve ter entre 1 e 100 caracteres.")
     @Column(length = 100)
