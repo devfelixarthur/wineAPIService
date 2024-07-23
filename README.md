@@ -16,6 +16,7 @@ Para executar este projeto localmente, é necessário ter o seguinte instalado:
 
 - Java 17
 - Maven 3.6 ou superior
+- Alterar no arquivo Application.Properties as chaves URL_DB, USERNAME_DB e USERNAME_PASSWORD com as credenciais do banco local.
 
 ## ⚙️ Configuração e Instalação
 
