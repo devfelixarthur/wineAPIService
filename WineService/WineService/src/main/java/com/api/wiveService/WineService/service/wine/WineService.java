@@ -20,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -47,7 +48,7 @@ public class WineService {
     @Value("${UPLOAD_IMAGE_URL}")
     private String apiUrl;
 
-
+    @Transactional
     public ResponsePadraoDTO cadastrarWine(CadastrarWineDTO form) {
         Integer currentYear = Year.now().getValue();
 
@@ -104,6 +105,7 @@ public class WineService {
         }
     }
 
+    @Transactional
     public ResponsePadraoDTO alterarWine(AlterarWineDTO form) {
         Optional<Wine> wineExiste = wineRepository.findById(form.id());
 
@@ -132,6 +134,7 @@ public class WineService {
 
     }
 
+    @Transactional
     public ResponseWineDTO getAllWines(Integer itemInicio, Integer itemFim) {
         if ((itemInicio == null) || (itemFim == null) || (itemInicio < 1) || (itemFim < 1) || (itemInicio > itemFim)) {
             throw new WineException("Parâmetros de Paginação invalidos.", HttpStatus.BAD_REQUEST);
@@ -186,7 +189,7 @@ public class WineService {
         );
     }
 
-
+    @Transactional
     public ResponsePadraoDTO alterarStatus(AlterarStatusWineDTO form) {
 
         Optional<Wine> wineOptional = wineRepository.findById(form.getId());
@@ -209,6 +212,8 @@ public class WineService {
         logger.info("----------------------FIM LOGGER INFO:----------------------");
         return ResponsePadraoDTO.sucesso("Status do Vinho " + wine.getNome() + " alterado.");
     }
+
+    @Transactional
     public ResponseCountryDTO getAllCountries() {
         List<ResponseCountryDTO.CountryDTO> countries = Arrays.stream(Pais.values())
                 .map(pais -> new ResponseCountryDTO.CountryDTO(pais.getThreeDigitsCode(), pais.getName()))
@@ -217,6 +222,7 @@ public class WineService {
         return new ResponseCountryDTO((long) countries.size(), countries);
     }
 
+    @Transactional
     public ResponseAdegaDTO getAllAdegas() {
         List<String> adegas = wineRepository.getAllAdegas();
 
@@ -227,6 +233,7 @@ public class WineService {
         return adegasDTO;
     }
 
+    @Transactional
     public ResponseWineDTO getWinesByFields(int itemInicio, int itemFim, String wineName, String pais, String uva, String adega) {
         if (wineName != null && wineName.length() < 3) {
             throw new WineException("O Parâmetro wineName deve ter pelo menos 3 caracteres.", HttpStatus.BAD_REQUEST);
@@ -273,6 +280,7 @@ public class WineService {
         return new ResponseWineDTO(winePage.getTotalElements(), wineDtos);
     }
 
+    @Transactional
     public ResponseUvasDTO getAllUvas() {
         List<String> uvas = wineRepository.getAllUvas();
 
