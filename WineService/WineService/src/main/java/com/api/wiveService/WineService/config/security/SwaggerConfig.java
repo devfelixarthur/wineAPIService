@@ -25,12 +25,6 @@ import org.springframework.context.annotation.Configuration;
         externalDocs = @ExternalDocumentation(description = "Definições adicionais aqui")
 )
 
-@SecurityScheme(
-        name = "bearerAuth",
-        type = SecuritySchemeType.HTTP,
-        scheme = "bearer",
-        bearerFormat = "JWT"
-)
 public class SwaggerConfig {
 
     @Bean
